@@ -8,17 +8,19 @@ const Favori = () => {
   const { favoriId, setFavoriId, favori, setFavori, card } = useYosContext();
   const [cardCompare, setCardCompare] = useState([]);
   const [deleteProps, setDeleteProps] = useState(false);
-  const {currentUser}=useAuthContext()
-  useEffect(() => {
-    const matchedCards = favoriId.map((compareItem) => {
-      const matchingCard = card.find(
-        (cardItem) => cardItem.id === compareItem.id
-      );
-      return matchingCard;
-    });
+  const { currentUser } = useAuthContext();
+  const sessionData = JSON.parse(sessionStorage.getItem("favoriID"));
+ console.log(sessionData,"id");
+  const matchedCards = sessionData.map((compareItem) => {
+    const matchingCard = card.find(
+      (cardItem) => cardItem.id === compareItem.id
+    );
+    return matchingCard;
+  });
 
+  useEffect(() => {
     setCardCompare(matchedCards);
-  }, [favoriId, card, deleteProps]);
+  }, [card, deleteProps]);
 
   const deleteCompare = async (prop) => {
     setDeleteProps(!deleteProps);
@@ -28,17 +30,19 @@ const Favori = () => {
         {
           params: {
             id: `${prop}`,
-            // id: "1686156639697",
-            // user_id: user?.userID,
             user_id: currentUser,
             token:
               "SX2qL5O3ivipPSMIWN8nXnaLWOiy4cEq7UdgZk448T5ZDpT1qbgMIrXVNquP1CWyNAH3JvoEVqnjiyg20a17549275a86d0e835660e56847e87a",
           },
         }
       );
-      setFavoriId((prevCompareId) =>
-        prevCompareId.filter((id) => id.id !== prop)
-      );
+      const updatedFavori = sessionData.filter((item) => item.id !== prop);
+      setFavoriId(updatedFavori);
+      sessionStorage.setItem("favoriID", JSON.stringify(updatedFavori));
+      // favoriId((prevCompareId) =>
+      //   prevCompareId.filter((id) => id?.id !== prop)
+      // );
+      // sessionData.filter((item)=> item.id !== prop)
       console.log("delete", responseCompareDelete.data);
     } catch (error) {
       console.log("delete Hatasi", error);
@@ -48,13 +52,17 @@ const Favori = () => {
   return (
     <div className="container-fluid">
       <div className="p-5 mb-2 bg-primary text-white" style={{ width: "100%" }}>
-        <h2 className="p-title fw-bold mx-5">Compare</h2>
+        <h2 className="p-title fw-bold mx-5">Favori</h2>
       </div>
       <div className="row gap-3">
-        {cardCompare.map((item) => {
+        {cardCompare?.map((item) => {
           return (
-            <div className="card col-6" style={{ width: "18rem" }}>
-              <button onClick={() => deleteCompare(item.id)}>
+            <div
+              className="card col-6"
+              key={item?.id}
+              style={{ width: "18rem" }}
+            >
+              <button onClick={() => deleteCompare(item?.id)}>
                 <strong>X sil</strong>
               </button>
               <img
@@ -63,26 +71,19 @@ const Favori = () => {
                 alt="Card image cap"
               />
               <div className="card-body">
-                <h5 className="card-title">{item["university"]["tr"]}</h5>
+                <h5 className="card-title">{item?.university.tr}</h5>
               </div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
-                  <Link key={item?.id} to={`/universities/${item.id}`}>
+                  <Link key={item?.id} to={`/universities/${item?.id}`}>
                     {" "}
-                    {item["faculty"]["tr"]}
+                    {item?.faculty.tr}
                   </Link>{" "}
                 </li>
-                <li className="list-group-item">{item["department"]["tr"]}</li>
-                <li className="list-group-item">{item["city"]["tr"]}</li>
+                <li className="list-group-item">{item?.department.tr}</li>
+                <li className="list-group-item">{item?.city.tr}</li>
               </ul>
-              <div className="card-body">
-                {/* <a href="#" className="card-link">
-                  Card link
-                </a>
-                <a href="#" className="card-link">
-                  Another link
-                </a> */}
-              </div>
+        
             </div>
           );
         })}

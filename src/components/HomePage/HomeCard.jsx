@@ -49,10 +49,16 @@ const HomeCard = ({ item, universityImage }) => {
             },
           }
         );
-        if (!compareId.includes(responseCompare.data)) {
-          setCompareId((prevIds) => [...prevIds, responseCompare.data]);
+        const newCompareId = JSON.parse(sessionStorage.getItem("compareId")) || [];
+    
+        if (!newCompareId.includes(responseCompare.data)) {
+          newCompareId.push(responseCompare.data);
+          sessionStorage.setItem("compareId", JSON.stringify(newCompareId));
+          
+          setCompareId(newCompareId);
           setIsBoolen(!isBoolen);
         }
+ 
       } else if (!isBoolen) {
         const responseCompareDelete = await axios.get(
           `https://tr-yös.com/api/v1/users/deletecompare.php`,
@@ -73,6 +79,7 @@ const HomeCard = ({ item, universityImage }) => {
           );
           
         }
+        sessionStorage.setItem('compareId', JSON.stringify(compareId.filter((id) => id !== responseCompareDelete.data)));
       }
     } catch (error) {
       console.log(error);
@@ -108,10 +115,20 @@ const toggleShowSignInHeartModal = async () => {
           },
         }
       );
-      if (!favoriId.includes(responseFavori.data)) {
-        setFavoriId((prevIds) => [...prevIds, responseFavori.data]);
+      const newFavoriId = JSON.parse(sessionStorage.getItem("favoriID")) || [];
+    
+      if (!newFavoriId.includes(responseFavori.data)) {
+        newFavoriId.push(responseFavori.data);
+        sessionStorage.setItem("favoriID", JSON.stringify(newFavoriId));
+        
+        setCompareId(newFavoriId);
         setIsBoolen(!isBoolen);
       }
+      // if (!favoriId.includes(responseFavori.data)) {
+      //   setFavoriId((prevIds) => [...prevIds, responseFavori.data]);
+      //   sessionStorage.setItem('favoriId', JSON.stringify([...favoriId, responseFavori.data]));
+      //   setIsBoolen(!isBoolen);
+      // }
     } else if (!isBoolen) {
       const responseFavoriDelete = await axios.get(
         `https://tr-yös.com/api/v1/users/deletefavorite.php`,
@@ -129,8 +146,11 @@ const toggleShowSignInHeartModal = async () => {
       if (favoriId.includes(item.id)) {
         setFavoriId((prevIds) =>
           prevIds.filter((id) => id !== responseFavoriDelete.data)
+
         );
+
       }
+
     }
   } catch (error) {
     console.log(error);
@@ -141,10 +161,7 @@ const toggleShowSignInHeartModal = async () => {
 };
 ///<-----------------------------------FAVORİ END---------------------------------------------->
   
-// useEffect(() => {
-//   toggleShowSignInCompareModal()
-//   toggleShowSignInHeartModal()
-// },[])
+
 
     const departmentName = item?.university?.tr;
   const departmentImages = universityImage[departmentName] || [];

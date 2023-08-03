@@ -63,10 +63,11 @@ width: auto;
 border: 1px solid #E6EBF1
 }
 
-h2 {
+h3 {
   color: rgb(220, 219, 219);
-  font-size: 50px;
+  font-size: 40px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
 }
 
 @media  (min-width: 1024px) {

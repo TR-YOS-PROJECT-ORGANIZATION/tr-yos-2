@@ -103,8 +103,8 @@ const Account = () => {
 
   return (
     <div className="">
-      <div className="infoDiv  p-5 mb- bg-primary text-white">
-        <h2 className=" fw-bold mx-5 pt-5">{t('account.myAccount')}</h2>
+      <div className="infoDiv  p-5 mb- bg-primary text-white ">
+        <h2 className=" fw-bold mt-5  mx-5 pt-5 text-start">{t('account.myAccount')}</h2>
       </div>
      
            <div className="">
