@@ -26,13 +26,14 @@ const HomeCard = ({ item, universityImage }) => {
     setFavoriId,
     favori,
     setFavori,
+   
   } = useYosContext();
   const {currentUser}=useAuthContext()
   const [isBoolen, setIsBoolen] = useState(true)
 
  ///<-----------------------------------COMPARE START---------------------------------------------->
   const toggleShowSignInCompareModal = async () =>{
-    setShowSignInCompareModal(!showSignInCompareModal);
+    setShowSignInCompareModal(true);
     
     
     try {
@@ -80,6 +81,14 @@ const HomeCard = ({ item, universityImage }) => {
     console.log("mnd", item.id);
 
   }
+
+
+  const handleCloseModal = () => {
+    setShowSignInCompareModal(false);
+  };
+
+
+
  ///<-----------------------------------COMPARE END---------------------------------------------->
  ///<-----------------------------------FAVORİ START---------------------------------------------->
 const toggleShowSignInHeartModal = async () => {
@@ -240,15 +249,21 @@ const toggleShowSignInHeartModal = async () => {
           </ListGroup.Item>
         </ListGroup>
       </Card>
-      {/* Modal componentleri tanımlanıyor */}
+  
       <Modal
         show={showSignInCompareModal}
         onHide={toggleShowSignInCompareModal}
         centered
+        
       >
-        {/* LogIn componenti modalin içine yerleştiriliyor */}
         <LogIn />
       </Modal>
+
+
+
+
+
+      
       {/* Modal componentleri tanımlanıyor */}
       <Modal
         show={showSignInHeartModal}

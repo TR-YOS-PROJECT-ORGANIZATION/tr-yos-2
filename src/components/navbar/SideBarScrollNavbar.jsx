@@ -21,23 +21,23 @@ import LanguageSelector from "../Languages/LanguageSelector";
 const SideBarScrollNavbar = () => {
   const { t } = useTranslation();
 
-  const { currentUser } = useAuthContext();
-  const [showModal, setShowModal] = useState(false);
+  const { currentUser,toggleForm,handleCloseModal,showModal,currentForm } = useAuthContext();
+  
 
   const location = useLocation();
   const [scrollBackground, setScrollBackground] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const [currentForm, setCurrentForm] = useState("login");
+  // const [currentForm, setCurrentForm] = useState("login");
+  // const [showModal, setShowModal] = useState(false);
+  // const toggleForm = (formName) => {
+  //   setCurrentForm(formName);
+  //   setShowModal(true);
+  // };
 
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+  // const handleCloseModal = () => {
+  //   setShowModal(false);
+  // };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -247,11 +247,10 @@ const SideBarScrollNavbar = () => {
         <Modal.Header closeButton style={{ border: "none" }}></Modal.Header>
         <Modal.Body>
           {currentForm === "login" ? (
-            <LogIn setShowModal={handleCloseModal} onFormSwitch={toggleForm} />
+            <LogIn />
           ) : (
             <Register
-              setShowModal={handleCloseModal}
-              onFormSwitch={toggleForm}
+         
             />
           )}
         </Modal.Body>
