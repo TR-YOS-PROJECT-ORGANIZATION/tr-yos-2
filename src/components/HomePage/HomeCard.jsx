@@ -100,8 +100,14 @@ const HomeCard = ({ item, universityImage }) => {
  ///<-----------------------------------FAVORİ START---------------------------------------------->
 const toggleShowSignInHeartModal = async () => {
   //https://tr-yös.com/api/v1/users/addfavorite.php
-  setShowSignInHeartModal(!showSignInHeartModal);
 
+  if (currentUser) {
+
+    console.log("Kullanıcı giriş yaptı. Karşılaştırma sayfasına yönlendiriliyor...");
+  } else {
+    // Kullanıcı giriş yapmamışsa, oturum açma formunu aç
+    setShowModal(!showModal);
+  }
   try {
     if (isBoolen) {
       const responseFavori = await axios.get(
@@ -280,7 +286,7 @@ const toggleShowSignInHeartModal = async () => {
         onHide={toggleShowSignInHeartModal}
         centered
       >
-        {/* LogIn componenti modalin içine yerleştiriliyor */}
+   
         <LogIn />
       </Modal>
     </Container>
