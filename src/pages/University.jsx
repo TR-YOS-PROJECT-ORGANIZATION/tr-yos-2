@@ -32,7 +32,7 @@ const University = () => {
   return (
     <div className="">
       <div className="info-div p-5 mb-2 bg-primary text-white ">
-        <h2 className=" page-title mt-5 fw-bold mx-5">Universites</h2>
+        <h2 className=" page-title fw-bold mx-5">Universites</h2>
         <span className="fw-small mx-5">
           You Can Check All Universities
         </span>

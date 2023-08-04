@@ -5,7 +5,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Select from "react-select";
 import "../Style/Departmants.css";
 
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 
 
 import { useYosContext } from "../../context/Context";
@@ -16,7 +16,7 @@ import HomeCard from "../HomePage/HomeCard";
 
 const Departments = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+
   const location = useLocation();
   const { selectedCityIds, selectedUniversityIds, selectedDepartmentIds } =
     location.state || {};
@@ -27,7 +27,7 @@ const Departments = () => {
   const random12Cards = shuffledCards.slice(0, 12);
   const universityImages = universities.reduce((map, university) => {
     if (university && university.images && university.images.length > 0) {
-      map[university.tr] = university.images;
+      map[university.en] = university.images;
     }
     return map;
   }, {});
@@ -64,25 +64,6 @@ const Departments = () => {
       departmentsOptions?.find((option) => option.value === departmentId)
     )
   );
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const selectedCityIds = selectedCities?.map((option) => option.value);
-    const selectedUniversityIds = selectedUniversities?.map(
-      (option) => option.value
-    );
-    const selectedDepartmentIds = selectedDepartments?.map(
-      (option) => option.value
-    );
-
-    navigate("/departmants", {
-      state: {
-        selectedCityIds,
-        selectedUniversityIds,
-        selectedDepartmentIds,
-      },
-    });
-  };
 
   const handleCityChange = (selectedOptions) => {
     setSelectedCities(selectedOptions);
@@ -135,8 +116,8 @@ selectedDepartmentIds?.includes(item.department.code)
 
   return (
     <div>
-      <div className="infoDiv  p-5 mb-2 bg-primary text-white" >
-        <h3 className=" page-title mt-5 fw-bold mx-5">{t('departments.title')}</h3>
+      <div className="infoDiv mt-5 p-5 mb-2 bg-primary text-white" >
+        <h3 className=" page-title fw-bold mx-5">{t('departments.title')}</h3>
       </div>
       <Container>
         <Row className="d-flex ">
@@ -203,9 +184,7 @@ selectedDepartmentIds?.includes(item.department.code)
                 </div>
 
                 <div className="d-flex justify-content-between mt-2"></div>
-                <Button variant="primary" type="submit" className="p-3 mt-4"
-                 onClick={handleSubmit}
-                >
+                <Button variant="primary" type="submit" className="p-3 mt-4">
                   {t('departments.submitSearch')}
                 </Button>
               </Form>
