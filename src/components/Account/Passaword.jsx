@@ -98,3 +98,76 @@ const Passaword = () => {
 
 export default Passaword;
 
+// import axios from 'axios';
+// import React, { useState } from 'react';
+
+// const Passaword = () => {
+//   const [currentPassword, setCurrentPassword] = useState("");
+//   const [newPassword, setNewPassword] = useState("");
+//   const [repeatPassword, setRepeatPassword] = useState("");
+//   const MY_TOKEN =
+//   "SX2qL5O3ivipPSMIWN8nXnaLWOiy4cEq7UdgZk448T5ZDpT1qbgMIrXVNquP1CWyNAH3JvoEVqnjiyg20a17549275a86d0e835660e56847e87a";
+//     const url="https://tr-yös.com/api/v1/users/changepassword.php?"
+//   const updatePassword = async()=>{
+//     const resPassword = await axios.post(url,)
+//   }
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     console.log("Current Password:", currentPassword);
+//     console.log("New Password:", newPassword);
+//   };
+
+//   return (
+//     <div className='w-100'>
+//       <hr style={{ width: "100%" }} />
+//       <form className="row g-4" onSubmit={handleSubmit}>
+//         <div className="col-8">
+//           <label htmlFor="inputText" className="form-label">
+//             Current Password*
+//           </label>
+//           <input
+//             type="password"
+//             className="form-control p-3"
+//             required
+//             value={currentPassword}
+//             onChange={(e) => setCurrentPassword(e.target.value)}
+//           />
+//         </div>
+//         <div className="col-8">
+//           <label htmlFor="inputEmail" className="form-label">
+//             New Password*
+//           </label>
+//           <input
+//             type="password"
+//             className="form-control p-3"
+//             required
+//             value={newPassword}
+//             onChange={(e) => setNewPassword(e.target.value)}
+//           />
+//         </div>
+//         <div className="col-8">
+//           <label htmlFor="inputEmail" className="form-label">
+//             Repeat New Password*
+//           </label>
+//           <input
+//             type="password"
+//             className="form-control p-3"
+//             required
+//             value={repeatPassword}
+//             onChange={(e) => setRepeatPassword(e.target.value)}
+//           />
+//         </div>
+
+//         <div className="col-12">
+//           <button type="submit" className="btn btn-primary p-3">
+//             Save Changes
+//           </button>
+//         </div>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default Passaword;

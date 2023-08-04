@@ -11,6 +11,7 @@ import LogIn from "../Login/LogIn";
 import { useYosContext } from "../../context/Context";
 import axios from "axios";
 import { useAuthContext } from "../../context/AuthContext";
+import Register from "../Login/Register";
 
 const HomeCard = ({ item, universityImage }) => {
   // State değerleri ve toggle fonksiyonları tanımlanıyor
@@ -26,15 +27,24 @@ const HomeCard = ({ item, universityImage }) => {
     setFavoriId,
     favori,
     setFavori,
+   
   } = useYosContext();
-  const {currentUser}=useAuthContext()
+
+
+  const {currentUser,setShowModal,showModal}=useAuthContext()
   const [isBoolen, setIsBoolen] = useState(true)
 
  ///<-----------------------------------COMPARE START---------------------------------------------->
-  const toggleShowSignInCompareModal = async () =>{
-    setShowSignInCompareModal(!showSignInCompareModal);
-    
-    
+ const toggleShowSignInCompareModal = async (e) =>{
+  e.preventDefault()
+  
+  if (currentUser) {
+
+    console.log("Kullanıcı giriş yaptı. Karşılaştırma sayfasına yönlendiriliyor...");
+  } else {
+    // Kullanıcı giriş yapmamışsa, oturum açma formunu aç
+    setShowModal(!showModal);
+  }
     try {
       if (isBoolen) {
         const responseCompare = await axios.get(
@@ -48,16 +58,10 @@ const HomeCard = ({ item, universityImage }) => {
             },
           }
         );
-        const newCompareId = JSON.parse(sessionStorage.getItem("compareId")) || [];
-    
-        if (!newCompareId.includes(responseCompare.data)) {
-          newCompareId.push(responseCompare.data);
-          sessionStorage.setItem("compareId", JSON.stringify(newCompareId));
-          
-          setCompareId(newCompareId);
+        if (!compareId.includes(responseCompare.data)) {
+          setCompareId((prevIds) => [...prevIds, responseCompare.data]);
           setIsBoolen(!isBoolen);
         }
- 
       } else if (!isBoolen) {
         const responseCompareDelete = await axios.get(
           `https://tr-yös.com/api/v1/users/deletecompare.php`,
@@ -78,7 +82,6 @@ const HomeCard = ({ item, universityImage }) => {
           );
           
         }
-        sessionStorage.setItem('compareId', JSON.stringify(compareId.filter((id) => id !== responseCompareDelete.data)));
       }
     } catch (error) {
       console.log(error);
@@ -87,12 +90,24 @@ const HomeCard = ({ item, universityImage }) => {
     console.log("mnd", item.id);
 
   }
+
+
+
+
+
+
  ///<-----------------------------------COMPARE END---------------------------------------------->
  ///<-----------------------------------FAVORİ START---------------------------------------------->
 const toggleShowSignInHeartModal = async () => {
   //https://tr-yös.com/api/v1/users/addfavorite.php
-  setShowSignInHeartModal(!showSignInHeartModal);
 
+  if (currentUser) {
+
+    console.log("Kullanıcı giriş yaptı. Karşılaştırma sayfasına yönlendiriliyor...");
+  } else {
+    // Kullanıcı giriş yapmamışsa, oturum açma formunu aç
+    setShowModal(!showModal);
+  }
   try {
     if (isBoolen) {
       const responseFavori = await axios.get(
@@ -106,20 +121,10 @@ const toggleShowSignInHeartModal = async () => {
           },
         }
       );
-      const newFavoriId = JSON.parse(sessionStorage.getItem("favoriID")) || [];
-    
-      if (!newFavoriId.includes(responseFavori.data)) {
-        newFavoriId.push(responseFavori.data);
-        sessionStorage.setItem("favoriID", JSON.stringify(newFavoriId));
-        
-        setCompareId(newFavoriId);
+      if (!favoriId.includes(responseFavori.data)) {
+        setFavoriId((prevIds) => [...prevIds, responseFavori.data]);
         setIsBoolen(!isBoolen);
       }
-      // if (!favoriId.includes(responseFavori.data)) {
-      //   setFavoriId((prevIds) => [...prevIds, responseFavori.data]);
-      //   sessionStorage.setItem('favoriId', JSON.stringify([...favoriId, responseFavori.data]));
-      //   setIsBoolen(!isBoolen);
-      // }
     } else if (!isBoolen) {
       const responseFavoriDelete = await axios.get(
         `https://tr-yös.com/api/v1/users/deletefavorite.php`,
@@ -137,11 +142,8 @@ const toggleShowSignInHeartModal = async () => {
       if (favoriId.includes(item.id)) {
         setFavoriId((prevIds) =>
           prevIds.filter((id) => id !== responseFavoriDelete.data)
-
         );
-
       }
-
     }
   } catch (error) {
     console.log(error);
@@ -152,7 +154,10 @@ const toggleShowSignInHeartModal = async () => {
 };
 ///<-----------------------------------FAVORİ END---------------------------------------------->
   
-
+// useEffect(() => {
+//   toggleShowSignInCompareModal()
+//   toggleShowSignInHeartModal()
+// },[])
 
     const departmentName = item?.university?.tr;
   const departmentImages = universityImage[departmentName] || [];
@@ -185,7 +190,7 @@ const toggleShowSignInHeartModal = async () => {
             right: "10px",
             color: "#0B3660",
           }}
-          type="submit"
+          type="button"
           onClick={toggleShowSignInCompareModal}
         >
           <i
@@ -233,7 +238,7 @@ const toggleShowSignInHeartModal = async () => {
               size="lg"
               style={{ position: "absolute", top: "190px", right: "10px" }}
               className="btn btn-outline-light  my-5 py-1 px-1 m-1 rounded-circle border-1  d-flex flex-nowrap"
-              type="submit"
+              type="button"
               onClick={toggleShowSignInHeartModal}
             >
               <i class="heart fa-solid fa-heart-circle-check"></i>
@@ -257,22 +262,31 @@ const toggleShowSignInHeartModal = async () => {
           </ListGroup.Item>
         </ListGroup>
       </Card>
-      {/* Modal componentleri tanımlanıyor */}
+  
       <Modal
         show={showSignInCompareModal}
         onHide={toggleShowSignInCompareModal}
         centered
-      >
-        {/* LogIn componenti modalin içine yerleştiriliyor */}
-        <LogIn />
+        >
+
+        
+            <LogIn />
+     
+  
       </Modal>
+
+
+
+
+
+      
       {/* Modal componentleri tanımlanıyor */}
       <Modal
         show={showSignInHeartModal}
         onHide={toggleShowSignInHeartModal}
         centered
       >
-        {/* LogIn componenti modalin içine yerleştiriliyor */}
+   
         <LogIn />
       </Modal>
     </Container>

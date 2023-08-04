@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import HomeCard from "./HomeCard";
 import { Col, Container, Row } from "react-bootstrap";
@@ -7,8 +7,21 @@ import { useYosContext } from "../../context/Context";
 const HomeDepartmens = () => {
   const { t } = useTranslation();
   const { universities, card, setCompare, compare, user } = useYosContext();
-  const shuffledCards = card.sort(() => 0.5 - Math.random());
-  const random12Cards = shuffledCards.slice(0, 12);
+
+  // const shuffledCards = card.sort(() => 0.5 - Math.random());
+  // const random12Cards = shuffledCards.slice(0, 12);
+
+
+  const [random12Cards, setRandom12Cards] = useState([]); // State to store random cards
+
+  useEffect(() => {
+    const shuffledCards = card.sort(() => 0.5 - Math.random());
+    const selectedCards = shuffledCards.slice(0, 12);
+    setRandom12Cards(selectedCards);
+  }, [card]);
+
+
+
 
   const universityImages = universities.reduce((map, university) => {
     if (university && university.images && university.images.length > 0) {

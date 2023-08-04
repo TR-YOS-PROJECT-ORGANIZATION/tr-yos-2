@@ -118,13 +118,34 @@ export function AuthProvider({ children }) {
     }
   };
 
+// ................login/register model.............................
+ const [currentForm, setCurrentForm] = useState("login");
+  const [showModal, setShowModal] = useState(false);
+  const toggleForm = (formName) => {
+    setCurrentForm(formName);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+
+// ......................................................
   const contextValues = {
     loginPerson,
     registerPerson,
     logoutPerson,
     currentUser,
     setCurrentUser,
-    updatePerson, 
+    updatePerson,
+    toggleForm,
+    handleCloseModal,
+    showModal,
+    setShowModal,
+    currentForm,
+    setCurrentForm,
+
   };
    
   return (
