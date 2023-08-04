@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Select from "react-select";
@@ -23,11 +23,24 @@ const Departments = () => {
 
   const { card, cities, universities, departments } = useYosContext();
 
-  const shuffledCards = card.sort(() => 0.5 - Math.random());
-  const random12Cards = shuffledCards.slice(0, 12);
+  // const shuffledCards = card.sort(() => 0.5 - Math.random());
+  // const random12Cards = shuffledCards.slice(0, 12);
+
+
+  const [random12Cards, setRandom12Cards] = useState([]); // State to store random cards
+
+  useEffect(() => {
+    const shuffledCards = card.sort(() => 0.5 - Math.random());
+    const selectedCards = shuffledCards.slice(0, 12);
+    setRandom12Cards(selectedCards);
+  }, [card]);
+
+
+
+
   const universityImages = universities.reduce((map, university) => {
     if (university && university.images && university.images.length > 0) {
-      map[university.en] = university.images;
+      map[university.tr] = university.images;
     }
     return map;
   }, {});
