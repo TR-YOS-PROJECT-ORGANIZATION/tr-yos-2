@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import "../Style/Login.css";
+// import "../Style/Login.css";
+import "../Login/animation/LoginAnimation.css";
+
+
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { useTranslation } from 'react-i18next';
@@ -42,9 +45,9 @@ const LogIn = () => {
   // const location =useLocation()
 
   return (
-   
+    <div className="box">
       <form
-        className="   p-3 w-100 h-100 login-form "
+        className=" form   p-3 w-100 h-100  "
         onSubmit={(e) => handleSubmit(e)}
       >
       <h2>{t('logIn.signIn')}</h2>
@@ -86,25 +89,30 @@ const LogIn = () => {
               className="form-check-input"
               id="exampleCheck1"
             />
-            <label className="form-check-label" htmlFor="exampleCheck1">
+            <label className="form-check-label" htmlFor="exampleCheck1"
+          style={{
+          fontSize:"15px"
+          }}
+            
+            >
             {t('logIn.savePassword')}
             </label>
           </div>
           <Link
-            style={{ textDecoration: "none" }} //   onClick={() => forgotPassword(email)}
+            style={{ textDecoration: "none", fontSize:"15px" }} //   onClick={() => forgotPassword(email)}
           >
           {t('logIn.forgetPassword')}
           </Link>
         </div>
 
-        <div className=" h-100 text-center mt-5">
+        <div className=" h-100 text-center ">
           <hr />
          
           <p>
           {t('logIn.signUpQuestion')}
             <button 
-              className="text-primary mx-2"
-              style={{ textDecoration: "none" }}
+              className="btnS text-primary mx-2"
+              style={{ textDecoration: "none", fontSize:"20px" }}
               onClick={() => toggleForm('register')}
             >
             
@@ -113,10 +121,10 @@ const LogIn = () => {
  
           </p>
         </div>
-        <div className="d-flex justify-content-center align-items-center">
-          {" "}
+        <div className=" d-flex justify-content-center align-items-center">
+    
           <button
-            className=" btn btn-primary mt-3 py-1"
+            className="btnG  mt-4 py-1"
             type="button"
             
           >
@@ -130,7 +138,7 @@ const LogIn = () => {
       </form>
 
       
-    // </div>
+    </div>
   );
 };
 export default LogIn;
