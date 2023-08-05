@@ -235,8 +235,8 @@ const SideBarScrollNavbar = () => {
       </Navbar>
 
       <Modal show={showModal} onHide={handleCloseModal} centered>
-        <Modal.Header closeButton style={{ border: "none" }}></Modal.Header>
-        <Modal.Body>
+        {/* <Modal.Header closeButton style={{ border: "none" }}></Modal.Header> */}
+        <Modal.Body >
           {currentForm === "login" ? (
             <LogIn />
           ) : (
