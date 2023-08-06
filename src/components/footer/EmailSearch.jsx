@@ -34,10 +34,10 @@ try {
     <main className="cont">
       <div className="d-flex align-items-center justify-content-center flex-column">
         <h1 className="email-h1">{t("emailSearch.workingWithUs")}</h1>
-        <p className="email-p m-5 d-block">
+        <marquee className="email-p m-5 d-block fs-3">
           {t("emailSearch.message")}
           <span className="m-2 d-block"></span>
-        </p>
+        </marquee>
       </div>
 
       <div className="SearchBox">

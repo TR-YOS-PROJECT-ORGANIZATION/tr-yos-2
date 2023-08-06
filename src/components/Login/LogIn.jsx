@@ -52,7 +52,7 @@ const LogIn = () => {
         className="   p-3 w-100 h-100 login-form "
         onSubmit={(e) => handleSubmit(e)}
       >
-      <h2>{t('logIn.signIn')}</h2>
+      <h2 className="loginTitle">{t('logIn.signIn')}</h2>
         <div className="form-group w-100 mt-3 inputBox">
           <input
             type="text"
@@ -108,7 +108,7 @@ const LogIn = () => {
           <p>
           {t('logIn.signUpQuestion')}
             <button 
-              className="text-primary mx-2"
+              className=" btnSgn text-primary mx-2"
               style={{ textDecoration: "none" }}
               onClick={() => toggleForm('register')}
             >
@@ -132,27 +132,7 @@ const LogIn = () => {
             
           </button>
         </div>
-        <div
-aria-live="polite"
-aria-atomic="true"
-style={{ position: "relative", minHeight: "200px" }}
->
-{/* Success Toast */}
-<ToastComponent
-  show={showSuccessToast}
-  onClose={() => setShowSuccessToast(false)}
-  type="success"
-  message="Login successfully."
-/>
 
-{/* Error Toast */}
-<ToastComponent
-  show={showErrorToast}
-  onClose={() => setShowErrorToast(false)}
-  type="error"
-  message="An error occurred while changing password."
-/>
-</div>
       </form>
 
       

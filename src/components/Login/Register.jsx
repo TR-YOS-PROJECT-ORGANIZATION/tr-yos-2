@@ -48,7 +48,7 @@ const Register = () => {
     // <div className="container d-flex flex-column align-items-center mt-5 col-4 h-75 py-5 container-signup ">
 
     <form className="  p-3  h-100 " onSubmit={handleSubmit}>
-      <h2>{t("register.signUp")}</h2>
+      <h2 className="registerTitle">{t("register.signUp")}</h2>
       <div className="form-group w-100 mt-3 inputBox">
         <input
           type="text"
@@ -92,18 +92,18 @@ const Register = () => {
         />
       </div>
 
-      <button type="submit" className="btn btn-primary w-100 mt-5">
+      <button type="submit" className="btn btn-primary w-100 mt-5 mb-5">
         {t("register.signUp")}
       </button>
-
-      <div className="d-flex justify-content-around  mt-5 ">
-        <hr />
+ <hr/>
+      <div className="d-flex justify-content-around  ">
+     
         <div className="">
           <div>
             {t("register.signInQuestion")}{" "}
             <button
                onClick={() => toggleForm("login")}
-              className="text-primary mx-2"
+              className="btnRgs text-primary mx-2"
               style={{ textDecoration: "none" }}
             >
               {t("register.signIn")}

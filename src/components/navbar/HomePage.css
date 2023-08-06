@@ -23,6 +23,56 @@ height: px !important;
   /* color: #017EFA; */
 }
 
+@media (max-width: 374px) {
+  .modalC{
+ padding:0px;
+  }
 
+}
+
+
+@media (min-width: 375px) and (max-width: 424px) {
+  .modalC {
+    
+  }
+}
+
+
+
+
+@media (min-width: 425px) and (max-width: 767px) {
+  .modalC{
+  
+  }
+}
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .modalC{
+
+  }
+}
+
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .modalC{
+
+}
+
+}
+
+@media (min-width: 1440px) and (max-width: 2559px) {
+  .modalC{
+  
+ 
+  }
+}
+
+@media (min-width: 2560px) {
+  .modalC{
+
+
+  }
+}
 
 
