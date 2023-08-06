@@ -209,22 +209,24 @@ const DepartmentsCard = ({ item }) => {
           </Carousel>
         </div>
         <Button
-          className="h-20 p-1 px-2 bg-light rounded-3 border-0 d-flex flex-nowrap"
+          variant="light"
+          size="lg"
+          className="comp h-20 p-1 px-2 rounded-1 border-0 d-flex flex-nowrap"
           style={{
             position: "absolute",
             top: "195px",
             right: "10px",
-            background: isBoolen ? "red" : "green",
-            color: "#0B3660",
+            background: isBoolen ? "#E6EBF1" : "#26e3a7",
           }}
-          onClick={(e)=>toggleShowSignInCompareModal(e)}
+          type="button"
+          onClick={toggleShowSignInCompareModal}
         >
           <i
-            className="fa-solid fa-rotate-right fa-md p-1"
-            style={{ color: isBoolen ? "red" : "green" }}
+            className="fa-solid p-1 fa-rotate-right fa-md"
+          
           ></i>
           <span className="mx-1"></span>
-          {t("departmentsCard.compare")}
+          Compare
         </Button>
         <Card.Body
           className="cardBody d-flex w-100 justify-content-between"
@@ -258,15 +260,22 @@ const DepartmentsCard = ({ item }) => {
           </div>{" "}
           <span className="mx-2"></span>
           <Button
-            variant="light"
-            size="lg"
-            style={{ position: "absolute", top: "190px", right: "10px" ,background: isBoolenFavori ? "red" : "green",}}
-            className="btn btn-outline-light  my-5 py-1 px-1 m-1 rounded-circle border-1  d-flex flex-nowrap"
-            type="button"
-            onClick={toggleShowSignInHeartModal}
-          >
-            <i class="heart fa-solid fa-heart-circle-check"></i>
-          </Button>
+              variant="light"
+              size="lg"
+              style={{
+                position: "absolute",
+                top: "190px",
+                right: "10px",
+               
+              }}
+              className="btn btn-outline-light  my-5 py-1 px-1 m-1 rounded-circle border-1  d-flex flex-nowrap"
+              type="button"
+              onClick={toggleShowSignInHeartModal}
+            >
+              <i class="heart fa-solid fa-heart-circle-check"
+               style={{ color: isBoolenFavori ? "  #017EFA" : "  #00724e",}}
+              ></i>
+            </Button>
         </Card.Body>
         <ListGroup className="list-group-flush w-100">
           <ListGroup.Item>
