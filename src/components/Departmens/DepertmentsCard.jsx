@@ -226,7 +226,7 @@ const DepartmentsCard = ({ item }) => {
           
           ></i>
           <span className="mx-1"></span>
-          Compare
+          {t("compare.title")}
         </Button>
         <Card.Body
           className="cardBody d-flex w-100 justify-content-between"
@@ -247,7 +247,7 @@ const DepartmentsCard = ({ item }) => {
             <Link
                 key={item.id}
                 to={`/universities/${item.id}`}
-                target="_blank"
+               
                 rel="noopener noreferrer"
                 className="dep text-decoration-none"
               >

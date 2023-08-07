@@ -230,7 +230,7 @@ const HomeCard = ({ item, universityImage }) => {
               <Link
                 key={item.id}
                 to={`/universities/${item.id}`}
-                target="_blank"
+               
                 rel="noopener noreferrer"
                 className="dep text-decoration-none"
               >
