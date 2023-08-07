@@ -40,6 +40,9 @@
   min-height:229.609px;
   width: auto;
 }
+.carousel-indicators {
+  display: none !important;
+}
 @media  (min-width: 1024px) {
      .uni{
       font-size:small !important;
